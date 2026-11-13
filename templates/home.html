@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotton Weed Detection And Classification</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('static/creative-feng-shui-composition_23-2149058737.avif'); /* Replace 'your-background-image.jpg' with your actual image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #333; /* Default text color */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 50px 0;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .section-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: calc(30% - 20px);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Define color shades for each card */
+        .card:nth-child(1) {
+            background: linear-gradient(45deg, #ffce54, #ffae3e); /* Yellow gradient */
+        }
+
+        .card:nth-child(2) {
+            background: linear-gradient(45deg, #a0d468, #8cc152); /* Green gradient */
+        }
+
+        .card:nth-child(3) {
+            background: linear-gradient(45deg, #4fc1e9, #3bafda); /* Blue gradient */
+        }
+
+        .card-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .card-text {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .card-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .card-link:hover {
+            color: #0056b3;
+        }
+
+        /* Button Styles */
+        .colab-button {
+            display: block;
+            margin: 50px auto;
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .colab-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Cotton Weed Detection</h1>
+        <p>Get insights into weed detection, classification, and analytics.</p>
+
+        <!-- Weed Detection Section -->
+        <div class="section">
+            <h2 class="section-title">Weed Detection</h2>
+            <div class="section-content">
+                <div class="card">
+                    <h3 class="card-title">Detect Weeds</h3>
+                    <p class="card-text">Detect different types of weeds in cotton fields.</p>
+                    <a href="./webcam.html" class="card-link">Start Cam Detection</a>
+                    <a href="./index1.html" class="card-link">Upload Image</a>
+                </div>
+
+                <!-- Weed Classification Section -->
+                <div class="card">
+                    <h3 class="card-title">Classify Weeds</h3>
+                    <p class="card-text">Classify the weed in the field image</p>
+                    <a href="./classification.html" class="card-link">Start Classification</a>
+                </div>
+
+                <!-- Analytics Section -->
+                <div class="card">
+                    <h3 class="card-title">Performance Analytics</h3>
+                    <p class="card-text">Our Analytics and statistics</p>
+                    <a href="./analytics.html" class="card-link">View Analytics</a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Colab Button -->
+        <button class="colab-button" onclick="window.open('https://colab.research.google.com/drive/1dom734AcMBeIoKeq6r0Hv3GhE4GbxDsV?usp=sharing')">Open Colab Notebook</button>
+    </div>
+</body>
+</html>

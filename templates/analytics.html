@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #e6f7ff 0%, #cce6ff 100%);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .model-section {
+            margin-top: 30px;
+        }
+        .model-name {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .images-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .large-image-container {
+            text-align: center;
+        }
+        img {
+            max-width: 45%;
+            border-radius: 5px;
+        }
+        .large-image {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Model Results</h1>
+        
+        <div class="model-section">
+            <h2 class="model-name">Combination(InceptionV3+Resnet152) Model Results</h2>
+            <div class="images-container">
+                <img src="../static/analysis/Picture2.png" alt="Image 1">
+                <img src="../static/analysis/Picture3.png" alt="Image 2">
+            </div>
+            <div class="large-image-container">
+                <img src="../static/analysis/Picture4.png" alt="Large Image" class="large-image">
+            </div>
+        </div>
+        
+        <div class="model-section">
+            <h2 class="model-name">InceptionV3 Model Results</h2>
+            <div class="images-container">
+                <img src="../static/analysis/Picture5.png" alt="ResNet Image 1">
+                <img src="../static/analysis/Picture6.png" alt="ResNet Image 2">
+            </div>
+        </div>
+        <div class="model-section">
+            <h2 class="model-name">YOLOV8 model analysis</h2>
+            <div class="large-image-container">
+                <p>Actual bounding boxes:</p>
+                <img src="../static/analysis/val_batch2_labels.jpg" alt="Image 7">
+                <p>Predicted bounding boxes:</p>
+                <img src="../static/analysis/val_batch2_pred.jpg" alt="Image 8">
+            </div>
+        </div>
+        <!-- <div class="model-section">
+            <h2 class="model-name">Inception Model Results</h2>
+            <div class="images-container">
+                <img src="inception_image1.jpg" alt="Inception Image 1">
+                <img src="inception_image2.jpg" alt="Inception Image 2">
+            </div>
+            <div class="large-image-container">
+                <img src="inception_large_image.jpg" alt="Inception Large Image" class="large-image">
+            </div>
+        </div> -->
+    </div>
+</body>
+</html>

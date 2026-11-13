@@ -1,0 +1,325 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #333;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 20px;
+            color: #007bff;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Classification Result</h1>
+</header>
+<img src="/uploads/06282021_IphoneSE_YL_Carpetweed_001.JPG" alt="Uploaded Image">
+<div class="container">
+
+    <h2>Predicted Weed: {{ predicted_weed }}</h2>
+    <p>Description:</p>
+    <p id="description"></p>
+    <p>Prevention:</p>
+    <p id="prevention"></p>
+</div>
+<script>
+    function displayWeedInfo(weedName) {
+        var weedData = {
+            "CarpetWeeds": {
+                "description": "Carpetweed (Mollugo verticillata) forms a flat, circular, close-to-the-ground mat as its stems radiate from the center of the plant. A non-native summer annual weed, carpetweed has tiny, white flowers with five petals and tongue-shaped leaves. It grows from a taproot and it spreads by seed. It is particularly fond of recently disturbed soil, such as in new garden beds or lawns.",
+                "prevention": "The best defense against carpetweed in lawns is a healthy, well-maintained turf. Choose a type of lawn grass that grows well in your area, and maintain it according to the needs of the specific type of grass. Irrigate the lawn when there is less than 1.5 inches (3.8 cm.) of rain in a week and fertilize regularly. Mow the lawn to the recommended height, never removing more than 1/3 of the length of the blades at a time."
+            },
+            "Crabgrass": {
+                "description": "Crabgrass is the common name for a genus of plants (Digitaria) that includes annual and perennial types of grass. The species generally have broad, flat blades and produce long flower clusters and thousands of seeds per growing season.",
+                "prevention": "Killing crabgrass before it forms is ideal and can be done using an organic pre-emergent herbicide."
+            },
+            "Eclipta":{
+                "description":"Eclipta alba (bhringaraj, Family: Asteraceae) is an annual, erect, branched, and creeping herb with rooting at nodes.",
+                "prevention":"preemergence applications of Strongarm (diclosulam) or a preemergence application of Valor (flumioxazin) provide good to excellent residual control of eclipta.Under extremely dense populations of eclipta, control from a soil-applied herbicide may need to be augmented with a sequential postemergence herbicide application."
+            },
+            "Goosegrass":{
+                "description":"Goosegrass or wiregrass, is a warm season, summer annual with stems radiating outwards from a central point. The distinctive white center of goosegrass distinguishes it from most other grass weeds. It is a weed of turfgrass, ornamental landscapes and agronomic crops",
+                "prevention":"Pre-emergence herbicides are important tools for managing goosegrass in lawns prior to the weed’s germination.Mulching (2-3 inches layer mulch) prevents the seeds from germinating.Proper plowing and harrowing before planting"
+            },
+            "Morningglory":{
+                "description":"MorningGlory are summer annual broadleaf weeds,and are the common name for over 1,000 species of flowering plants in the family Convolvulaceae.As the name suggests, most morning glory flowers unfurl into full bloom in the early morning.",
+                "prevention":"The use of thick mulches or weed barrier fabric can help smother the seedlings in spring,Systemic and broad leaf herbicides have some effect"
+            },
+            "Nutsedge":{
+                "description":"Yellow nutsedge and purple nutsedge are grass-like perennial weeds that can cause severe losses in cotton fields.Nutsedges grow during the frost-free season, spreading and propagating through an extensive underground network of rhizomes, bulbs, and small, starchy tubers or “nutlets.",
+                "prevention":"Timely repeated tillage,soil solarization,crop rotation,Mowing,Mulching."
+            },
+            "PalmerAmaranth":{
+                "description":"Palmer amaranth, also known as Palmer pigweed, is an extremely aggressive, fast-growing species that has become a serious weed problem in vegetable and row crops",
+                "prevention":"A diversified crop rotation that varies tillage, planting, and harvest schedules from year to year as well as crop species and plant family, can help reduce problems with Palmer amaranth.",
+            },
+            "Prickly Sida":{
+                "description":"Prickly sida, also known by its scientific name Sida spinosa, is a flowering plant belonging to the mallow family (Malvaceae). It is considered a weed in many regions due to its invasive nature and ability to compete with crops for resources.",
+                "prevention":"populations will be easier to manage with annual moldboard plowing than with reduced tillage regimens.",
+            },
+            "Purslane":{
+                "description":"Purslane is a fast-growing herbaceous annual with succulent leaves and stems.Recent research demonstrates that purslane has better nutritional quality than the major cultivated vegetables, with higher beta-carotene, ascorbic acid, and alpha-linolenic acid",
+                "prevention":"The best time to tackle purslane is when plants are still small and haven't yet developed a strong root system. Take action by applying Roundup® for Lawns, which is specially formulated to kill weeds without harming your lawn when used as directed."
+            },
+            "Ragweed":{
+                "description":"The ragweeds are coarse annuals or perennials with rough hairy stems and mostly lobed or divided leaves.They grow upright, to 3 feet tall, with frequent branching.Ragweed pollen is a common allergen. A single plant may produce about a billion grains of pollen per season,[11][12] and the pollen is transported on the wind. It causes about half of all cases of pollen-associated allergic",
+                "prevention":"Fungal rusts and the leaf-eating beetle Ophraella communa have been proposed as agents of biological pest control of ragweeds."
+            },
+            "Sicklepod":{
+                "description":"Sicklepod are upright or spawling summer annual herb or marginally perennial shrub with compound leaves.Seedling cotyledons are large and round,with 3-5 prominent, pale veins radiating from the base in a hand-like pattern. ",
+                "prevention":"Rotation to winter and spring cereal grains helps suppress sicklepod populations. A shallow sweep cultivator, rolling cultivator or tine weeder with relatively stiff tines will be more effective than a rotary hoe or tine weeder with highly flexible tines.",
+            },
+            "SpottedSpurge":{
+                "description":"A small, short-lived, herbaceous plant with creeping to semi-upright stems.This is one of those \"grows anywhere weeds\" that can be a nuisance, although not as difficult to eradicate as invasive vines or weed trees. Spurge weed likes full sun; if allowed to spread, it can cover other plants and prevent their absorption of sunlight.",
+                "prevention":"Non-specific herbicides are an option but keep in mind these chemicals will kill everything in their path,Alternative to herbicides is pouring boiling water or vinegar over the area. This is especially effective after pulling, as it may help kill the remaining roots.",
+            },
+            "SpurredAnoda":{
+                "description":"Bushy, branched weed growing to about 3-4 inch tall and wide.his plant has a low growing, spreading habit and the stems can spread four to five feet from the taproot.",
+                "prevention":"practices like crop rotation, proper irrigation management, and maintaining healthy soil conditions."
+            },
+            "Swinecress":{
+                "description":"It is a persistent nuisance that spreads quickly and smells unpleasant.Swinecress seedlings can be identified by small, narrow, lace-shaped cotyledons.As it matures, these stems grow out along the ground, sometimes reaching 20 inches (50 cm) in length, turning up slightly at the tips.",
+                "prevention":"Swine-cress is not considered a serious arable weed. Surface tillage and the cultivations associated with growing root crops should keep it in check."
+            },
+            "Waterhemp":{
+                "description":"Waterhemp is an annual in the pigweed family.Stems of waterhemp are smooth and lack hairs, which help to distinguish it ",
+                "prevention":"Early identification and control are key to minimizing its spread and impact.Herbicide programs include multiple applications of residual herbicides. "
+            }
+                // Paste the weed information JSON object here
+        };
+
+        var descriptionElement = document.getElementById('description');
+        var preventionElement = document.getElementById('prevention');
+
+        descriptionElement.textContent = weedData[weedName]["description"];
+        preventionElement.textContent = weedData[weedName]["prevention"];
+    }
+
+    // Example function call when weed name is selected
+    displayWeedInfo('{{ predicted_weed }}'); // Replace '{{ predicted_weed }}' with the actual predicted weed type
+</script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 24px;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .card {
+            flex: 1;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 0 10px 20px;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-title {
+            font-size: 20px;
+            color: #007bff;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .card-text {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .image-container {
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        /* Different color gradients for each card */
+        .description-card {
+            background: linear-gradient(135deg, #FFA07A, #FF7F50);
+        }
+        .prevention-card {
+            background: linear-gradient(135deg, #87CEFA, #4682B4);
+        }
+        .image-card {
+            background: linear-gradient(135deg, #98FB98, #32CD32);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Classification Result: {{ predicted_weed }}</h1>
+</header>
+
+<div class="container">
+    <!-- Card for Weed Description -->
+    <div class="card description-card">
+        <h2 class="card-title">Weed Description</h2>
+        <p class="card-text" id="description"></p>
+    </div>
+
+    <!-- Card for Weed Prevention -->
+    <div class="card prevention-card">
+        <h2 class="card-title">Prevention</h2>
+        <p class="card-text" id="prevention"></p>
+    </div>
+
+    <!-- Card for Weed Image -->
+    <div class="card image-card">
+        <h2 class="card-title">Weed Image</h2>
+        <img src="../static/uploads/{{filename}}" alt="Weed Image">
+    </div>
+</div>
+<script>
+    function displayWeedInfo(weedName) {
+        var weedData = {
+            "CarpetWeeds": {
+                "description": "Carpetweed (Mollugo verticillata) forms a flat, circular, close-to-the-ground mat as its stems radiate from the center of the plant. A non-native summer annual weed, carpetweed has tiny, white flowers with five petals and tongue-shaped leaves. It grows from a taproot and it spreads by seed. It is particularly fond of recently disturbed soil, such as in new garden beds or lawns.",
+                "prevention": "The best defense against carpetweed in lawns is a healthy, well-maintained turf. Choose a type of lawn grass that grows well in your area, and maintain it according to the needs of the specific type of grass. Irrigate the lawn when there is less than 1.5 inches (3.8 cm.) of rain in a week and fertilize regularly. Mow the lawn to the recommended height, never removing more than 1/3 of the length of the blades at a time."
+            },
+            "Crabgrass": {
+                "description": "Crabgrass is the common name for a genus of plants (Digitaria) that includes annual and perennial types of grass. The species generally have broad, flat blades and produce long flower clusters and thousands of seeds per growing season.",
+                "prevention": "Killing crabgrass before it forms is ideal and can be done using an organic pre-emergent herbicide."
+            },
+            "Eclipta":{
+                "description":"Eclipta alba (bhringaraj, Family: Asteraceae) is an annual, erect, branched, and creeping herb with rooting at nodes.",
+                "prevention":"preemergence applications of Strongarm (diclosulam) or a preemergence application of Valor (flumioxazin) provide good to excellent residual control of eclipta.Under extremely dense populations of eclipta, control from a soil-applied herbicide may need to be augmented with a sequential postemergence herbicide application."
+            },
+            "Goosegrass":{
+                "description":"Goosegrass or wiregrass, is a warm season, summer annual with stems radiating outwards from a central point. The distinctive white center of goosegrass distinguishes it from most other grass weeds. It is a weed of turfgrass, ornamental landscapes and agronomic crops",
+                "prevention":"Pre-emergence herbicides are important tools for managing goosegrass in lawns prior to the weed’s germination.Mulching (2-3 inches layer mulch) prevents the seeds from germinating.Proper plowing and harrowing before planting"
+            },
+            "Morningglory":{
+                "description":"MorningGlory are summer annual broadleaf weeds,and are the common name for over 1,000 species of flowering plants in the family Convolvulaceae.As the name suggests, most morning glory flowers unfurl into full bloom in the early morning.",
+                "prevention":"The use of thick mulches or weed barrier fabric can help smother the seedlings in spring,Systemic and broad leaf herbicides have some effect"
+            },
+            "Nutsedge":{
+                "description":"Yellow nutsedge and purple nutsedge are grass-like perennial weeds that can cause severe losses in cotton fields.Nutsedges grow during the frost-free season, spreading and propagating through an extensive underground network of rhizomes, bulbs, and small, starchy tubers or “nutlets.",
+                "prevention":"Timely repeated tillage,soil solarization,crop rotation,Mowing,Mulching."
+            },
+            "PalmerAmaranth":{
+                "description":"Palmer amaranth, also known as Palmer pigweed, is an extremely aggressive, fast-growing species that has become a serious weed problem in vegetable and row crops",
+                "prevention":"A diversified crop rotation that varies tillage, planting, and harvest schedules from year to year as well as crop species and plant family, can help reduce problems with Palmer amaranth.",
+            },
+            "Prickly Sida":{
+                "description":"Prickly sida, also known by its scientific name Sida spinosa, is a flowering plant belonging to the mallow family (Malvaceae). It is considered a weed in many regions due to its invasive nature and ability to compete with crops for resources.",
+                "prevention":"populations will be easier to manage with annual moldboard plowing than with reduced tillage regimens.",
+            },
+            "Purslane":{
+                "description":"Purslane is a fast-growing herbaceous annual with succulent leaves and stems.Recent research demonstrates that purslane has better nutritional quality than the major cultivated vegetables, with higher beta-carotene, ascorbic acid, and alpha-linolenic acid",
+                "prevention":"The best time to tackle purslane is when plants are still small and haven't yet developed a strong root system. Take action by applying Roundup® for Lawns, which is specially formulated to kill weeds without harming your lawn when used as directed."
+            },
+            "Ragweed":{
+                "description":"The ragweeds are coarse annuals or perennials with rough hairy stems and mostly lobed or divided leaves.They grow upright, to 3 feet tall, with frequent branching.Ragweed pollen is a common allergen. A single plant may produce about a billion grains of pollen per season,[11][12] and the pollen is transported on the wind. It causes about half of all cases of pollen-associated allergic",
+                "prevention":"Fungal rusts and the leaf-eating beetle Ophraella communa have been proposed as agents of biological pest control of ragweeds."
+            },
+            "Sicklepod":{
+                "description":"Sicklepod are upright or spawling summer annual herb or marginally perennial shrub with compound leaves.Seedling cotyledons are large and round,with 3-5 prominent, pale veins radiating from the base in a hand-like pattern. ",
+                "prevention":"Rotation to winter and spring cereal grains helps suppress sicklepod populations. A shallow sweep cultivator, rolling cultivator or tine weeder with relatively stiff tines will be more effective than a rotary hoe or tine weeder with highly flexible tines.",
+            },
+            "SpottedSpurge":{
+                "description":"A small, short-lived, herbaceous plant with creeping to semi-upright stems.This is one of those \"grows anywhere weeds\" that can be a nuisance, although not as difficult to eradicate as invasive vines or weed trees. Spurge weed likes full sun; if allowed to spread, it can cover other plants and prevent their absorption of sunlight.",
+                "prevention":"Non-specific herbicides are an option but keep in mind these chemicals will kill everything in their path,Alternative to herbicides is pouring boiling water or vinegar over the area. This is especially effective after pulling, as it may help kill the remaining roots.",
+            },
+            "SpurredAnoda":{
+                "description":"Bushy, branched weed growing to about 3-4 inch tall and wide.his plant has a low growing, spreading habit and the stems can spread four to five feet from the taproot.",
+                "prevention":"practices like crop rotation, proper irrigation management, and maintaining healthy soil conditions."
+            },
+            "Swinecress":{
+                "description":"It is a persistent nuisance that spreads quickly and smells unpleasant.Swinecress seedlings can be identified by small, narrow, lace-shaped cotyledons.As it matures, these stems grow out along the ground, sometimes reaching 20 inches (50 cm) in length, turning up slightly at the tips.",
+                "prevention":"Swine-cress is not considered a serious arable weed. Surface tillage and the cultivations associated with growing root crops should keep it in check."
+            },
+            "Waterhemp":{
+                "description":"Waterhemp is an annual in the pigweed family.Stems of waterhemp are smooth and lack hairs, which help to distinguish it ",
+                "prevention":"Early identification and control are key to minimizing its spread and impact.Herbicide programs include multiple applications of residual herbicides. "
+            }
+                // Paste the weed information JSON object here
+        };
+
+        var descriptionElement = document.getElementById('description');
+        var preventionElement = document.getElementById('prevention');
+
+        descriptionElement.textContent = weedData[weedName]["description"];
+        preventionElement.textContent = weedData[weedName]["prevention"];
+    }
+
+    // Example function call when weed name is selected
+    displayWeedInfo('{{ predicted_weed }}'); // Replace '{{ predicted_weed }}' with the actual predicted weed type
+</script>
+</body>
+</html>
